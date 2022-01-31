@@ -4,7 +4,7 @@ window.hlx.initSidekick({
   plugins: [
     {
       id: 'blocks',
-      condition: (sk) => sk.isEditor() && (sk.location.search.includes('.docx&')),
+      condition: true,
       button: {
         text: 'Blocks',
         action: (_, sk) => {
