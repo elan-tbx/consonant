@@ -6,8 +6,10 @@ window.hlx.initSidekick({
       id: 'blocks',
       button: {
         text: 'Blocks',
-        action: (_, sk) => {
-          console.log(sk);
+        action: () => {
+          const script = document.createElement('script');
+          script.src = 'http://localhost:3000/tools/sidekick/plugins/blocks.js';
+          document.head.appendChild(script);
         },
       },
     },
