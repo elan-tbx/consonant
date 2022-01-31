@@ -4,7 +4,6 @@ window.hlx.initSidekick({
   plugins: [
     {
       id: 'blocks',
-      condition: true,
       button: {
         text: 'Blocks',
         action: (_, sk) => {
