@@ -13,6 +13,10 @@
 const PROJECT = 'consonant--adobecom';
 const LCP_BLOCKS = ['marquee']; // add your LCP blocks to the list
 
+const script = document.createElement('script');
+script.src = 'http://localhost:3000/tools/sidekick/plugins/blocks.js';
+document.head.appendChild(script);
+
 /**
  * log RUM if part of the sample.
  * @param {string} checkpoint identifies the checkpoint in funnel
