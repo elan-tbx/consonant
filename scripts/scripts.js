@@ -13,9 +13,9 @@
 const PROJECT = 'consonant--adobecom';
 const LCP_BLOCKS = ['marquee']; // add your LCP blocks to the list
 
-const script = document.createElement('script');
-script.src = 'http://localhost:3000/tools/sidekick/plugins/blocks.js';
-document.head.appendChild(script);
+const blockScript = document.createElement('script');
+blockScript.src = 'http://localhost:3000/tools/sidekick/plugins/blocks.js';
+document.head.appendChild(blockScript);
 
 /**
  * log RUM if part of the sample.
@@ -109,6 +109,35 @@ export function addPublishDependencies(url) {
     window.hlx.dependencies = urls;
   }
 }
+
+export async function getPlaceholderList() {
+  if (!window.placeholders) {
+    const resp = await fetch('/placeholders.json');
+    const json = await resp.json();
+    window.placeholders = {};
+    json.data.forEach((placeholder) => {
+      window.placeholders[placeholder.key] = placeholder.content;
+    });
+  }
+  return window.placeholders;
+}
+
+async function findPlaceholders() {
+  const regex = /[^{{]+(?=}\})/g;
+  const placeholderList = await getPlaceholderList();
+  const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span');
+  textElements.forEach((el) => {
+    const foundPlaceholders = el.textContent.match(regex);
+    if (foundPlaceholders) {
+      foundPlaceholders.forEach((found) => {
+        if (placeholderList[found]) {
+          el.textContent = el.textContent.replace(new RegExp(`{{${found}}}`), placeholderList[found]);
+        }
+      });
+    }
+  });
+}
+findPlaceholders();
 
 /**
  * Wraps each section in an additional {@code div}.

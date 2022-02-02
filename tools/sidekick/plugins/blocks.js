@@ -1,5 +1,6 @@
 /* global ClipboardItem */
 const INVENTORY = 'http://localhost:3000/documentation/block-inventory.json';
+const PLACEHOLDERS = 'http://localhost:3000/placeholders.json';
 const PLUGIN_PATH = 'http://localhost:3000/tools/sidekick/plugins';
 
 const CONTENT_TYPES = ['Blocks', 'Placeholders', 'Colors', 'Assets'];
@@ -27,6 +28,15 @@ function createCopy(variant) {
   navigator.clipboard.write(data);
 }
 
+function createPlaceholderCopy(text) {
+  console.log(text);
+  const type = 'text/plain';
+  const blob = new Blob([`{{${text}}}`], { type });
+  // eslint-disable-next-line no-undef
+  const data = [new ClipboardItem({ [type]: blob })];
+  navigator.clipboard.write(data);
+}
+
 async function createImgCopy(img) {
   try {
     const data = await fetch(img.src);
@@ -38,18 +48,6 @@ async function createImgCopy(img) {
   } catch (err) {
     console.error(err.name, err.message);
   }
-
-  // console.log(img);
-  // const range = document.createRange();
-  // range.selectNode(img);
-  // window.getSelection().addRange(range);
-  // try {
-  //   const suc = document.execCommand('copy');
-  //   console.log(suc);
-  // } catch (err) {
-  //   console.log('didnt copy');
-  // }
-  // window.getSelection().removeAllRanges();
 }
 
 function loadStyle(href, callback) {
@@ -119,6 +117,29 @@ async function loadAssetList(list) {
   }
 }
 
+async function loadPlaceholderList(list) {
+  const resp = await fetch(PLACEHOLDERS);
+  const json = await resp.json();
+  json.data.forEach((placeholder) => {
+    const item = document.createElement('li');
+    const text = document.createElement('p');
+    text.textContent = placeholder.key;
+
+    const copy = document.createElement('button');
+    copy.addEventListener('click', (e) => {
+      e.target.classList.add('copied');
+      createPlaceholderCopy(text.textContent);
+      setTimeout(() => {
+        e.target.classList.remove('copied');
+      }, 3000);
+    });
+
+    item.append(text);
+    item.append(copy);
+    list.append(item);
+  });
+}
+
 function loadList(type, list) {
   list.innerHTML = '';
   switch (type) {
@@ -127,6 +148,9 @@ function loadList(type, list) {
       break;
     case 'Assets':
       loadAssetList(list);
+      break;
+    case 'Placeholders':
+      loadPlaceholderList(list);
       break;
     default:
       console.log('no list');
