@@ -13,9 +13,11 @@
 const PROJECT = 'consonant--adobecom';
 const LCP_BLOCKS = ['marquee']; // add your LCP blocks to the list
 
-const blockScript = document.createElement('script');
-blockScript.src = 'http://localhost:3000/tools/sidekick/plugins/blocks.js';
-document.head.appendChild(blockScript);
+if (window.location.hostname === 'localhost') {
+  const blockScript = document.createElement('script');
+  blockScript.src = 'http://localhost:3000/tools/sidekick/plugins/blocks.js';
+  document.head.appendChild(blockScript);
+}
 
 /**
  * log RUM if part of the sample.
