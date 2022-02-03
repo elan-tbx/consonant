@@ -26,9 +26,13 @@
   background-image: url('/tools/sidekick/plugins/spectrum-back.svg');
   background-repeat: no-repeat;
   background-position: 50%;
-  width: 36px;
+  width: 44px;
   height: 36px;
   cursor: pointer;
+}
+
+.con-header button:hover {
+  background-color: rgba(52, 52, 52, 0.5);
 }
 
 .allow-back .con-header button {
@@ -118,6 +122,19 @@ li button {
 
 .con-finder .con-Assets-list li button:hover {
   background-color: rgb(48 48 48 / 80%);
+}
+
+.con-Colors-list li {
+  border-bottom: unset;
+  position: relative;
+}
+
+.con-Colors-list li button {
+  display: none;
+}
+
+.con-Colors-list li:hover button {
+  display: block;
 }
 
 .con-finder li button.copied,

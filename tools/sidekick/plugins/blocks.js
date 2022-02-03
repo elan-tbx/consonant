@@ -1,38 +1,15 @@
 /* global ClipboardItem */
-const INVENTORY = 'http://localhost:3000/documentation/block-inventory.json';
-const PLACEHOLDERS = 'http://localhost:3000/placeholders.json';
-const PLUGIN_PATH = 'http://localhost:3000/tools/sidekick/plugins';
+const DOMAIN = 'http://localhost:3000';
+const BLOCK_LIBRARY = `${DOMAIN}/docs/block-library.json`;
+const COLOR_LIBRARY = `${DOMAIN}/docs/color-library.json`;
+const PLACEHOLDER_LIBRARY = `${DOMAIN}/docs/placeholder-library.json`;
+const PLUGIN_PATH = `${DOMAIN}/tools/sidekick/plugins`;
+const ASSETS_FOLDER = 'https://localhost:8443/api/assets/we-retail/en/activities/hiking-camping.json';
 
 const CONTENT_TYPES = ['Blocks', 'Placeholders', 'Colors', 'Assets'];
 
-function getMarquee(variant, background) {
-  return `
-  <table>
-    <tr><td colspan="2">${variant}</td></tr>
-    ${background}
-    <tr>
-      <td><h1>Title here</h1><p>Content here</p><p><strong><a href="#">Call to Action</a></strong></p></td>
-      <td><img src="./placeholder.png" alt="Placeholder"/></td>
-    </tr>
-  </table>`;
-}
-
-function createCopy(variant) {
-  const hasBg = !variant.includes('Quiet');
-  const bg = hasBg ? '<tr><td colspan="2"><img src="./placeholder.png" alt="Placeholder"/></td></tr>' : '';
-  const marquee = getMarquee(variant, bg);
-  const type = 'text/html';
-  const blob = new Blob([marquee], { type });
-  // eslint-disable-next-line no-undef
-  const data = [new ClipboardItem({ [type]: blob })];
-  navigator.clipboard.write(data);
-}
-
-function createPlaceholderCopy(text) {
-  console.log(text);
-  const type = 'text/plain';
-  const blob = new Blob([`{{${text}}}`], { type });
-  // eslint-disable-next-line no-undef
+function createCopy(text, type) {
+  const blob = new Blob([text], { type });
   const data = [new ClipboardItem({ [type]: blob })];
   navigator.clipboard.write(data);
 }
@@ -44,7 +21,6 @@ async function createImgCopy(img) {
     await navigator.clipboard.write([
       new ClipboardItem({ [blob.type]: blob }),
     ]);
-    console.log('Image copied.');
   } catch (err) {
     console.error(err.name, err.message);
   }
@@ -65,33 +41,64 @@ function loadStyle(href, callback) {
   }
 }
 
+function getTable(blockName, block) {
+  const rows = [...block.children];
+  const maxCols = rows.reduce((cols, row) => (
+    row.children.length > cols ? row.children.length : cols), 0);
+  const table = document.createElement('table');
+  const headerRow = document.createElement('tr');
+  headerRow.innerHTML = `<th colspan="${maxCols}">${blockName}</th>`;
+  table.append(headerRow);
+  rows.forEach((row) => {
+    const tr = document.createElement('tr');
+    [...row.children].forEach((col) => {
+      const td = document.createElement('td');
+      if (row.children.length < maxCols) {
+        td.setAttribute('colspan', maxCols);
+      }
+      td.innerHTML = col.innerHTML;
+      tr.append(td);
+    });
+    table.append(tr);
+  });
+  return table.outerHTML;
+}
+
 async function loadBlockList(list) {
-  const resp = await fetch(INVENTORY);
+  const resp = await fetch(BLOCK_LIBRARY);
   if (resp.status === 200) {
     const json = await resp.json();
-    json.data.forEach((block) => {
-      const blockItem = document.createElement('li');
-      const { name, variant } = block;
-      const blockName = document.createElement('p');
-      blockName.textContent = name;
+    json.data.forEach(async (blockGroup) => {
+      const pageResp = await fetch(`${DOMAIN}${blockGroup.path}.plain.html`);
+      const html = await pageResp.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const titles = doc.body.querySelectorAll(':scope > div > h2');
+      titles.forEach((title) => {
+        const blockItem = document.createElement('li');
+        const blockName = document.createElement('p');
+        blockName.textContent = title.textContent;
+        const table = getTable(title.textContent, title.nextElementSibling);
 
-      const copy = document.createElement('button');
-      copy.addEventListener('click', (e) => {
-        e.target.classList.add('copied');
-        setTimeout(() => {
-          e.target.classList.remove('copied');
-        }, 3000);
-        createCopy(variant);
+        const copy = document.createElement('button');
+        copy.addEventListener('click', (e) => {
+          e.target.classList.add('copied');
+          setTimeout(() => {
+            e.target.classList.remove('copied');
+          }, 3000);
+          createCopy(table, 'text/html');
+        });
+
+        blockItem.append(blockName);
+        blockItem.append(copy);
+        list.append(blockItem);
       });
-      blockItem.append(blockName);
-      blockItem.append(copy);
-      list.append(blockItem);
     });
   }
 }
 
 async function loadAssetList(list) {
-  const resp = await fetch('https://localhost:8443/api/assets/we-retail/en/activities/hiking-camping.json',
+  const resp = await fetch(ASSETS_FOLDER,
     { credentials: 'same-origin' });
   if (resp.status === 200) {
     const json = await resp.json();
@@ -118,7 +125,7 @@ async function loadAssetList(list) {
 }
 
 async function loadPlaceholderList(list) {
-  const resp = await fetch(PLACEHOLDERS);
+  const resp = await fetch(PLACEHOLDER_LIBRARY);
   const json = await resp.json();
   json.data.forEach((placeholder) => {
     const item = document.createElement('li');
@@ -128,13 +135,37 @@ async function loadPlaceholderList(list) {
     const copy = document.createElement('button');
     copy.addEventListener('click', (e) => {
       e.target.classList.add('copied');
-      createPlaceholderCopy(text.textContent);
+      createCopy(`{{${text.textContent}}}`, 'text/plain');
       setTimeout(() => {
         e.target.classList.remove('copied');
       }, 3000);
     });
 
     item.append(text);
+    item.append(copy);
+    list.append(item);
+  });
+}
+
+async function loadColorList(list) {
+  const resp = await fetch(COLOR_LIBRARY);
+  const json = await resp.json();
+  json.data.forEach((color) => {
+    const item = document.createElement('li');
+    const name = document.createElement('p');
+    name.textContent = color.key;
+    item.style.background = color.value;
+
+    const copy = document.createElement('button');
+    copy.addEventListener('click', (e) => {
+      e.target.classList.add('copied');
+      createCopy(color.value, 'text/plain');
+      setTimeout(() => {
+        e.target.classList.remove('copied');
+      }, 3000);
+    });
+
+    item.append(name);
     item.append(copy);
     list.append(item);
   });
@@ -152,6 +183,9 @@ function loadList(type, list) {
     case 'Placeholders':
       loadPlaceholderList(list);
       break;
+    case 'Colors':
+      loadColorList(list);
+      break;
     default:
       console.log('no list');
   }
@@ -165,7 +199,7 @@ function loadList(type, list) {
   // Header
   const header = document.createElement('div');
   header.className = 'con-header';
-  header.insertAdjacentHTML('afterbegin', '<p class="heading">Helix Finder</p>');
+  header.insertAdjacentHTML('afterbegin', '<p class="heading">Library</p>');
   const back = document.createElement('button');
   back.addEventListener('click', () => {
     const insetEls = finder.querySelectorAll('.inset');

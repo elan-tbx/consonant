@@ -3,9 +3,9 @@ window.hlx.initSidekick({
   hlx3: true,
   plugins: [
     {
-      id: 'blocks',
+      id: 'library',
       button: {
-        text: 'Blocks',
+        text: 'Library',
         action: () => {
           const script = document.createElement('script');
           script.src = 'http://localhost:3000/tools/sidekick/plugins/blocks.js';

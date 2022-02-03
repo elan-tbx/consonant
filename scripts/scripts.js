@@ -139,7 +139,6 @@ async function findPlaceholders() {
     }
   });
 }
-findPlaceholders();
 
 /**
  * Wraps each section in an additional {@code div}.
@@ -500,6 +499,7 @@ async function loadLazy(doc) {
   const header = doc.querySelector('header > div');
   const main = document.querySelector('main');
   if (main) {
+    findPlaceholders();
     loadBlocks(main);
 
     decorateBlock(header);
