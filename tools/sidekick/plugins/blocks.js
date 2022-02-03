@@ -4,7 +4,7 @@ const BLOCK_LIBRARY = `${DOMAIN}/docs/block-library.json`;
 const COLOR_LIBRARY = `${DOMAIN}/docs/color-library.json`;
 const PLACEHOLDER_LIBRARY = `${DOMAIN}/docs/placeholder-library.json`;
 const PLUGIN_PATH = `${DOMAIN}/tools/sidekick/plugins`;
-const ASSETS_FOLDER = 'https://localhost:8443/api/assets/we-retail/en/activities/hiking-camping.json';
+const ASSETS_FOLDER = 'https://localhost:8443/api/assets/i-love-helix.json';
 
 const CONTENT_TYPES = ['Blocks', 'Placeholders', 'Colors', 'Assets'];
 

@@ -1,0 +1,13 @@
+.promo {
+  padding: 36px 0;
+}
+
+.promo .hide {
+  display: none;
+}
+
+.promo > div:last-child {
+  margin: 0 auto;
+  max-width: 83.4%;
+  text-align: center;
+}

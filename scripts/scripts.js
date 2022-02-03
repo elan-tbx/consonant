@@ -114,11 +114,11 @@ export function addPublishDependencies(url) {
 
 export async function getPlaceholderList() {
   if (!window.placeholders) {
-    const resp = await fetch('/placeholders.json');
+    const resp = await fetch('/docs/placeholder-library.json');
     const json = await resp.json();
     window.placeholders = {};
     json.data.forEach((placeholder) => {
-      window.placeholders[placeholder.key] = placeholder.content;
+      window.placeholders[placeholder.key] = placeholder.us;
     });
   }
   return window.placeholders;
@@ -132,6 +132,7 @@ async function findPlaceholders() {
     const foundPlaceholders = el.textContent.match(regex);
     if (foundPlaceholders) {
       foundPlaceholders.forEach((found) => {
+        console.log(placeholderList);
         if (placeholderList[found]) {
           el.textContent = el.textContent.replace(new RegExp(`{{${found}}}`), placeholderList[found]);
         }
