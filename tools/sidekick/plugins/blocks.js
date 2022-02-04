@@ -8,36 +8,17 @@ const ASSETS_FOLDER = 'https://localhost:8443/api/assets/i-love-helix.json';
 
 const CONTENT_TYPES = ['Blocks', 'Placeholders', 'Colors', 'Assets'];
 
-function createCopy(text, type) {
-  const blob = new Blob([text], { type });
-  const data = [new ClipboardItem({ [type]: blob })];
+function createCopy(blob) {
+  const data = [new ClipboardItem({ [blob.type]: blob })];
   navigator.clipboard.write(data);
 }
 
-async function createImgCopy(img) {
-  try {
-    const data = await fetch(img.src);
-    const blob = await data.blob();
-    await navigator.clipboard.write([
-      new ClipboardItem({ [blob.type]: blob }),
-    ]);
-  } catch (err) {
-    console.error(err.name, err.message);
-  }
-}
-
-function loadStyle(href, callback) {
-  if (!document.querySelector(`head > link[href="${href}"]`)) {
+function loadStyle(href) {
+  if (!document.head.querySelector(`link[href="${href}"]`)) {
     const link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('href', href);
-    if (typeof callback === 'function') {
-      link.onload = (e) => callback(e.type);
-      link.onerror = (e) => callback(e.type);
-    }
     document.head.appendChild(link);
-  } else if (typeof callback === 'function') {
-    callback('noop');
   }
 }
 
@@ -86,7 +67,8 @@ async function loadBlockList(list) {
           setTimeout(() => {
             e.target.classList.remove('copied');
           }, 3000);
-          createCopy(table, 'text/html');
+          const blob = new Blob([table], { type: 'text/html' });
+          createCopy(blob);
         });
 
         blockItem.append(blockName);
@@ -109,12 +91,14 @@ async function loadAssetList(list) {
       img.src = href.replace(/\.[^/.]+$/, '');
 
       const copy = document.createElement('button');
-      copy.addEventListener('click', (e) => {
+      copy.addEventListener('click', async (e) => {
         e.target.classList.add('copied');
         setTimeout(() => {
           e.target.classList.remove('copied');
         }, 3000);
-        createImgCopy(img);
+        const data = await fetch(img.src);
+        const blob = await data.blob();
+        createCopy(blob);
       });
 
       item.append(img);
@@ -135,7 +119,9 @@ async function loadPlaceholderList(list) {
     const copy = document.createElement('button');
     copy.addEventListener('click', (e) => {
       e.target.classList.add('copied');
-      createCopy(`{{${text.textContent}}}`, 'text/plain');
+
+      const blob = new Blob([`{{${text.textContent}}}`], { type: 'text/plain' });
+      createCopy(blob);
       setTimeout(() => {
         e.target.classList.remove('copied');
       }, 3000);
@@ -159,7 +145,8 @@ async function loadColorList(list) {
     const copy = document.createElement('button');
     copy.addEventListener('click', (e) => {
       e.target.classList.add('copied');
-      createCopy(color.value, 'text/plain');
+      const blob = new Blob([color.value], { type: 'text/plain' });
+      createCopy(blob);
       setTimeout(() => {
         e.target.classList.remove('copied');
       }, 3000);
