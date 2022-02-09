@@ -1,12 +1,13 @@
 /* global ClipboardItem */
 const DOMAIN = 'http://localhost:3000';
 const BLOCK_LIBRARY = `${DOMAIN}/docs/block-library.json`;
+const TEMPLATE_LIBRARY = `${DOMAIN}/docs/template-library.json`;
 const COLOR_LIBRARY = `${DOMAIN}/docs/color-library.json`;
 const PLACEHOLDER_LIBRARY = `${DOMAIN}/docs/placeholder-library.json`;
 const PLUGIN_PATH = `${DOMAIN}/tools/sidekick/plugins`;
 const ASSETS_FOLDER = 'https://localhost:8443/api/assets/i-love-helix.json';
 
-const CONTENT_TYPES = ['Blocks', 'Placeholders', 'Colors', 'Assets'];
+const CONTENT_TYPES = ['Blocks', 'Templates', 'Placeholders', 'Colors', 'Assets'];
 
 function createCopy(blob) {
   const data = [new ClipboardItem({ [blob.type]: blob })];
@@ -79,6 +80,43 @@ async function loadBlockList(list) {
   }
 }
 
+async function loadTemplateList(list) {
+  const resp = await fetch(TEMPLATE_LIBRARY);
+  if (resp.status === 200) {
+    const json = await resp.json();
+    json.data.forEach(async (template) => {
+      const item = document.createElement('li');
+      const tempName = document.createElement('p');
+      tempName.textContent = template.Name;
+
+      const copy = document.createElement('button');
+      copy.addEventListener('click', async (e) => {
+        e.target.classList.add('copied');
+        setTimeout(() => {
+          e.target.classList.remove('copied');
+        }, 3000);
+        const plain = await fetch(`${DOMAIN}${template.path}.plain.html`);
+        const text = await plain.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        const content = doc.querySelectorAll('body > div > *');
+        const html = [...content].reduce((red, el) => {
+          if (el.nodeName === 'DIV') {
+            return `${red}${getTable(el.className, el)}<br>`;
+          }
+          return `${red}${el.outerHTML}<br>`;
+        }, '');
+        const blob = new Blob([html], { type: 'text/html' });
+        createCopy(blob);
+      });
+      item.append(tempName);
+      item.append(copy);
+
+      list.append(item);
+    });
+  }
+}
+
 async function loadAssetList(list) {
   const resp = await fetch(ASSETS_FOLDER,
     { credentials: 'same-origin' });
@@ -120,7 +158,7 @@ async function loadPlaceholderList(list) {
     copy.addEventListener('click', (e) => {
       e.target.classList.add('copied');
 
-      const blob = new Blob([`{{${text.textContent}}}`], { type: 'text/plain' });
+      const blob = new Blob([`<span style="background-color: grey; color: white">{{${text.textContent}}}</span>`], { type: 'text/html' });
       createCopy(blob);
       setTimeout(() => {
         e.target.classList.remove('copied');
@@ -163,6 +201,9 @@ function loadList(type, list) {
   switch (type) {
     case 'Blocks':
       loadBlockList(list);
+      break;
+    case 'Templates':
+      loadTemplateList(list);
       break;
     case 'Assets':
       loadAssetList(list);
