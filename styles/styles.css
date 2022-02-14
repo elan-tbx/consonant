@@ -17,22 +17,47 @@
 :root {
     /* Typography */
     --type-detail-all-weight: 700;
+    --type-detail-all-transform: uppercase;
+    --type-detail-l-size: 16px;
+    --type-detail-l-lh: 20px;
     --type-detail-m-size: 12px;
     --type-detail-m-lh: 15px;
-    --type-detail-m-transform: uppercase;
 
     --type-heading-all-weight: 700;
-    --type-heading-xl-size: 36px;
-    --type-heading-xl-lh: 45px;
+    --type-heading-xxl-size: 36px;
+    --type-heading-xxl-lh: 45px;
+    --type-heading-xl-size: 28px;
+    --type-heading-xl-lh: 35px;
 
+    --type-body-xl-size: 22px;
+    --type-body-xl-lh: 33px;
     --type-body-m-size: 18px;
     --type-body-m-lh: 27px;
-    
+
     /* Spacing */
+    --spacing-xs: 16px;
+    --spacing-s: 24px;
+    --spacing-m: 32px;
+    --spacing-l: 48px;
+    --spacing-xl: 56px;
+    --spacing-xxl: 80px;
 
     /* Grid */
     --grid-container-width: 83.4%;
-    --grid-column-width: 7.025%;
+    --grid-column-width: calc(var(--grid-container-width) / 12);
+}
+
+.docs-template {
+  --type-body-m-size: 36px;
+}
+
+@media screen and (min-width: 1200px) {
+    :root {
+        --type-heading-xxl-size: 44px;
+        --type-heading-xxl-lh: 55px;
+        --type-heading-xl-size: 36px;
+        --type-heading-xl-lh: 45px;
+    }
 }
 
 @media screen and (min-width: 1440px) {
@@ -56,6 +81,13 @@ body {
 }
 
 /* Typography */
+.heading-XXL {
+    font-size: var(--type-heading-xxl-size);
+    line-height: var(--type-heading-xxl-lh);
+    font-weight: var(--type-heading-all-weight);
+    margin: 0;
+}
+
 .heading-XL {
     font-size: var(--type-heading-xl-size);
     line-height: var(--type-heading-xl-lh);
@@ -69,11 +101,25 @@ body {
     margin: 0;
 }
 
+.body-XL {
+    font-size: var(--type-body-xl-size);
+    line-height: var(--type-body-xl-lh);
+    margin: 0;
+}
+
 .detail-M {
     font-size: var(--type-detail-m-size);
     line-height: var(--type-detail-m-lh);
     font-weight: var(--type-detail-all-weight);
-    text-transform: var(--type-detail-m-transform);
+    text-transform: var(--type-detail-all-transform);
+    margin: 0;
+}
+
+.detail-L {
+    font-size: var(--type-detail-l-size);
+    line-height: var(--type-detail-l-lh);
+    font-weight: var(--type-detail-all-weight);
+    text-transform: var(--type-detail-all-transform);
     margin: 0;
 }
 

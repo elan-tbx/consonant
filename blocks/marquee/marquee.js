@@ -11,7 +11,7 @@
  */
 
 /*
- * Marquee - v0.0.1
+ * Marquee - v0.0.2
  */
 
 function decorateButtons(el) {
@@ -31,10 +31,11 @@ function decorateButtons(el) {
 function decorateText(el) {
   const headings = el.querySelectorAll('h1, h2, h3, h4, h5, h6');
   const heading = headings[headings.length - 1];
-  heading.classList.add('heading-XL');
-  heading.nextElementSibling.classList.add('body-M');
+  const isLarge = el.closest('.marquee').classList.contains('large');
+  heading.className = isLarge ? 'heading-XXL' : 'heading-XL';
+  heading.nextElementSibling.className = isLarge ? 'body-XL' : 'body-M';
   if (heading.previousElementSibling) {
-    heading.previousElementSibling.classList.add('detail-M');
+    heading.previousElementSibling.className = isLarge ? 'detail-L' : 'detail-M';
   }
 }
 
