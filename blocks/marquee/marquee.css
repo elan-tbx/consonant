@@ -205,6 +205,11 @@
     margin-bottom: 0;
   }
 
+  .marquee .action-area a {
+    width: unset;
+    text-align: center;
+  }
+
   .marquee.large .action-area {
     gap: var(--spacing-xl);
   }
