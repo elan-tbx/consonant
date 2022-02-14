@@ -14,12 +14,13 @@
  * Marquee - v0.0.2
  */
 
-function decorateButtons(el) {
+function decorateButtons(el, isLarge) {
   const buttons = el.querySelectorAll('em a, strong a');
   buttons.forEach((button) => {
     const parent = button.parentElement;
     const buttonType = parent.nodeName === 'STRONG' ? 'blue' : 'outline';
-    button.classList.add('con-button', buttonType);
+    const buttonSize = isLarge ? 'button-XL' : 'button-M';
+    button.classList.add('con-button', buttonType, buttonSize);
     parent.insertAdjacentElement('afterend', button);
     parent.remove();
   });
@@ -28,10 +29,9 @@ function decorateButtons(el) {
   }
 }
 
-function decorateText(el) {
+function decorateText(el, isLarge) {
   const headings = el.querySelectorAll('h1, h2, h3, h4, h5, h6');
   const heading = headings[headings.length - 1];
-  const isLarge = el.closest('.marquee').classList.contains('large');
   heading.className = isLarge ? 'heading-XXL' : 'heading-XL';
   heading.nextElementSibling.className = isLarge ? 'body-XL' : 'body-M';
   if (heading.previousElementSibling) {
@@ -52,6 +52,7 @@ export default function init(el) {
   if (image) {
     image.classList.add('image');
   }
-  decorateButtons(text);
-  decorateText(text);
+  const isLarge = el.closest('.marquee').classList.contains('large');
+  decorateButtons(text, isLarge);
+  decorateText(text, isLarge);
 }

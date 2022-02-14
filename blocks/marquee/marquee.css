@@ -1,62 +1,67 @@
 .marquee {
-    position: relative;
-    color: #FFF;
-    display: flex;
+  position: relative;
+  color: #FFF;
+  display: flex;
 }
 
 .marquee.small, .marquee.quiet, .marquee.inline {
-    min-height: 360px;
+  min-height: 360px;
 }
 
 .marquee.light, .marquee.quiet, .marquee.inline {
-    color: #2C2C2C;
+  color: #2C2C2C;
 }
 
 .marquee.centered {
-    text-align: center;
+  text-align: center;
 }
 
 .marquee .background picture {
-    display: block;
-    position: absolute;
-    inset: 0;
+  display: block;
+  position: absolute;
+  inset: 0;
 }
 
 .marquee .background img {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
 
 .marquee .foreground {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: var(--spacing-m);
-    padding: var(--spacing-xl) 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--spacing-m);
+  padding: var(--spacing-xl) 0;
 }
 
 .marquee.small .foreground {
-    padding: var(--spacing-l) 0;
+  padding: var(--spacing-l) 0;
 }
 
-.marquee.large .foreground.container {
-    max-width: 100%;
-    padding: 0 0 var(--spacing-m) 0;
+.marquee.large .foreground {
+  padding: 0;
+  max-width: 100%;
 }
 
 .marquee.quiet .foreground > div {
-    flex: 0 0 100%;
+  flex: 0 0 100%;
 }
 
 .marquee.large .text {
-    max-width: var(--grid-container-width);
-    display: flex;
-    flex-direction: column;
+  max-width: var(--grid-container-width);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
 }
 
 .marquee .text .detail-M {
+  margin-bottom: var(--spacing-s);
+}
+
+.marquee.small .text .detail-M {
   margin-bottom: var(--spacing-xs);
 }
 
@@ -65,104 +70,149 @@
   margin-bottom: var(--spacing-xs);
 }
 
+.detail-M img {
+  display: block;
+}
+
 .marquee .text .heading-XL {
-    margin-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
 }
 
 .marquee .text .heading-XXL {
-    order: 2;
-    margin-bottom: var(--spacing-m);
+  order: 2;
+  margin-bottom: var(--spacing-m);
 }
 
 .marquee .text .body-M {
-    margin-bottom: var(--spacing-s);
+  margin-bottom: var(--spacing-s);
 }
 
 .marquee .text .body-XL {
   order: 4;
-  margin-bottom: var(--spacing-s);
+  margin-bottom: var(--spacing-m);
 }
 
 .marquee .text img {
-    max-height: 56px;
+  max-height: 56px;
 }
 
-.marquee .text .action-area {
-    display: flex;
-    margin: 0;
-    gap: var(--spacing-s);
+.marquee .action-area {
+  display: flex;
+  margin: 0;
+  gap: var(--spacing-s);
+  flex-wrap: wrap;
 }
 
-.marquee.large .text .action-area {
+.marquee .action-area a {
+  width: 100%;
+  text-align: center;
+}
+
+.marquee.large .action-area {
   order: 3;
   margin-bottom: var(--spacing-s);
 }
 
 .marquee.quiet.centered .action-area {
-    justify-content: center;
+  justify-content: center;
+}
+
+.action-area a {
+  font-size: var(--type-body-xs-size);
+  line-height: 32px;
+}
+
+.action-area .con-button {
+  line-height: 28px;
+}
+
+.action-area .con-button.button-XL {
+  line-height: 36px;
 }
 
 .marquee .image img {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 
 .marquee .text,
 .marquee.large .text {
-    order: 2;
+  order: 2;
 }
 
 .marquee .image,
 .marquee.large .image {
-    order: 1;
+  order: 1;
 }
 
 .marquee.small .text,
 .marquee.small .image {
-    order: unset;
+  order: unset;
 }
 
-@media screen and (min-width: 600px) {
-    .marquee {
-        min-height: 560px;
-    }
+@media screen and (min-width: 1200px) {
+  .marquee {
+    min-height: 560px;
+  }
 
-    .marquee.large {
-        min-height: 700px;
-    }
+  .marquee.large {
+    min-height: 700px;
+  }
 
-    .marquee .foreground {
-        flex-direction: row;
-        justify-content: space-between;
-    }
+  .marquee .foreground {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0;
+  }
 
-    .marquee.large .foreground.container {
-      max-width: var(--grid-container-width);
-    }
-    
-    .marquee .foreground > div {
-        flex: 0 0 calc(50% - calc(var(--grid-column-width) / 2));
-    }
-    
-    .marquee.medium .text,
-    .marquee.large .text {
-        order: unset;
-    }
+  .marquee.small .foreground {
+    padding: 0;
+  }
 
-    .marquee.large .text {
-      display: block;
-    }
+  .marquee.large .foreground {
+    max-width: var(--grid-container-width);
+  }
+  
+  .marquee .foreground > div {
+    flex: 0 0 calc(50% - calc(var(--grid-column-width) / 2));
+  }
 
-    .marquee.medium .image,
-    .marquee.large .image {
-        order: unset;
-    }
+  .marquee .text {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .marquee.small .text {
+    padding: var(--spacing-l) 0;
+  }
+  
+  .marquee .text,
+  .marquee.large .text {
+    order: unset;
+  }
 
-    .marquee .text .action-area,
-    .marquee.small .text .action-area,
-    .marquee.large .text .action-area {
-      margin-bottom: 0;
-    }
+  .marquee.large .text {
+    display: block;
+  }
+
+  .marquee .image,
+  .marquee.large .image {
+    order: unset;
+  }
+
+  .marquee .text .action-area,
+  .marquee.small .text .action-area,
+  .marquee.large .text .action-area {
+    margin-bottom: 0;
+  }
+
+  .marquee.large .action-area {
+    gap: var(--spacing-xl);
+  }
+
+  .marquee.action-area .con-button.button-XL {
+    line-height: 44px;
+    border-radius: 22px;
+  }
 }
 
 @media screen and (min-width: 1440px) {

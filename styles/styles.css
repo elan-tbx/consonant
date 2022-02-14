@@ -1,50 +1,52 @@
 @font-face {
-    font-family: 'Trebuchet MS';
-    size-adjust: 95%;
-    src: local('Trebuchet MS'),
-         local('TrebuchetMS');
-         font-weight: 700;
+  font-family: 'Trebuchet MS';
+  size-adjust: 95%;
+  src: local('Trebuchet MS'),
+        local('TrebuchetMS');
+        font-weight: 700;
 }
 
 @font-face {
-    font-family: 'Trebuchet MS';
-    size-adjust: 87%;
-    src: local('Trebuchet MS'),
-         local('TrebuchetMS');
-         font-weight: 400;
+  font-family: 'Trebuchet MS';
+  size-adjust: 87%;
+  src: local('Trebuchet MS'),
+        local('TrebuchetMS');
+        font-weight: 400;
 }
 
 :root {
-    /* Typography */
-    --type-detail-all-weight: 700;
-    --type-detail-all-transform: uppercase;
-    --type-detail-l-size: 16px;
-    --type-detail-l-lh: 20px;
-    --type-detail-m-size: 12px;
-    --type-detail-m-lh: 15px;
+  /* Typography */
+  --type-detail-all-weight: 700;
+  --type-detail-all-transform: uppercase;
+  --type-detail-l-size: 16px;
+  --type-detail-l-lh: 20px;
+  --type-detail-m-size: 12px;
+  --type-detail-m-lh: 15px;
 
-    --type-heading-all-weight: 700;
-    --type-heading-xxl-size: 36px;
-    --type-heading-xxl-lh: 45px;
-    --type-heading-xl-size: 28px;
-    --type-heading-xl-lh: 35px;
+  --type-heading-all-weight: 700;
+  --type-heading-xxl-size: 36px;
+  --type-heading-xxl-lh: 45px;
+  --type-heading-xl-size: 28px;
+  --type-heading-xl-lh: 35px;
 
-    --type-body-xl-size: 22px;
-    --type-body-xl-lh: 33px;
-    --type-body-m-size: 18px;
-    --type-body-m-lh: 27px;
+  --type-body-xl-size: 22px;
+  --type-body-xl-lh: 33px;
+  --type-body-m-size: 18px;
+  --type-body-m-lh: 27px;
+  --type-body-xs-size: 14px;
+  --type-body-xs-lh: 21px;
 
-    /* Spacing */
-    --spacing-xs: 16px;
-    --spacing-s: 24px;
-    --spacing-m: 32px;
-    --spacing-l: 48px;
-    --spacing-xl: 56px;
-    --spacing-xxl: 80px;
+  /* Spacing */
+  --spacing-xs: 16px;
+  --spacing-s: 24px;
+  --spacing-m: 32px;
+  --spacing-l: 48px;
+  --spacing-xl: 56px;
+  --spacing-xxl: 80px;
 
-    /* Grid */
-    --grid-container-width: 83.4%;
-    --grid-column-width: calc(var(--grid-container-width) / 12);
+  /* Grid */
+  --grid-container-width: 83.4%;
+  --grid-column-width: calc(var(--grid-container-width) / 12);
 }
 
 .docs-template {
@@ -52,97 +54,112 @@
 }
 
 @media screen and (min-width: 1200px) {
-    :root {
-        --type-heading-xxl-size: 44px;
-        --type-heading-xxl-lh: 55px;
-        --type-heading-xl-size: 36px;
-        --type-heading-xl-lh: 45px;
-    }
+  :root {
+      --type-heading-xxl-size: 44px;
+      --type-heading-xxl-lh: 55px;
+      --type-heading-xl-size: 36px;
+      --type-heading-xl-lh: 45px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
-    :root {
-        --grid-container-width: 1200px;
-        --grid-column-width: 100px;
-    }
+  :root {
+      --grid-container-width: 1200px;
+      --grid-column-width: 100px;
+  }
 }
 
 body {
-    font-family: 'adobe-clean', 'Trebuchet MS', sans-serif;
-    margin: 0;
-    font-size: var(--type-body-m-size);
-    line-height: var(--type-body-m-lh);
+  font-family: 'adobe-clean', 'Trebuchet MS', sans-serif;
+  margin: 0;
+  font-size: var(--type-body-m-size);
+  line-height: var(--type-body-m-lh);
 }
 
 /* Basics */
 .container {
-    max-width: var(--grid-container-width);
-    margin: 0 auto;
+  max-width: var(--grid-container-width);
+  margin: 0 auto;
 }
 
 /* Typography */
 .heading-XXL {
-    font-size: var(--type-heading-xxl-size);
-    line-height: var(--type-heading-xxl-lh);
-    font-weight: var(--type-heading-all-weight);
-    margin: 0;
+  font-size: var(--type-heading-xxl-size);
+  line-height: var(--type-heading-xxl-lh);
+  font-weight: var(--type-heading-all-weight);
+  margin: 0;
 }
 
 .heading-XL {
-    font-size: var(--type-heading-xl-size);
-    line-height: var(--type-heading-xl-lh);
-    font-weight: var(--type-heading-all-weight);
-    margin: 0;
+  font-size: var(--type-heading-xl-size);
+  line-height: var(--type-heading-xl-lh);
+  font-weight: var(--type-heading-all-weight);
+  margin: 0;
 }
 
 .body-M {
-    font-size: var(--type-body-m-size);
-    line-height: var(--type-body-m-lh);
-    margin: 0;
+  font-size: var(--type-body-m-size);
+  line-height: var(--type-body-m-lh);
+  margin: 0;
 }
 
 .body-XL {
-    font-size: var(--type-body-xl-size);
-    line-height: var(--type-body-xl-lh);
-    margin: 0;
+  font-size: var(--type-body-xl-size);
+  line-height: var(--type-body-xl-lh);
+  margin: 0;
 }
 
 .detail-M {
-    font-size: var(--type-detail-m-size);
-    line-height: var(--type-detail-m-lh);
-    font-weight: var(--type-detail-all-weight);
-    text-transform: var(--type-detail-all-transform);
-    margin: 0;
+  font-size: var(--type-detail-m-size);
+  line-height: var(--type-detail-m-lh);
+  font-weight: var(--type-detail-all-weight);
+  text-transform: var(--type-detail-all-transform);
+  margin: 0;
 }
 
 .detail-L {
-    font-size: var(--type-detail-l-size);
-    line-height: var(--type-detail-l-lh);
-    font-weight: var(--type-detail-all-weight);
-    text-transform: var(--type-detail-all-transform);
-    margin: 0;
+  font-size: var(--type-detail-l-size);
+  line-height: var(--type-detail-l-lh);
+  font-weight: var(--type-detail-all-weight);
+  text-transform: var(--type-detail-all-transform);
+  margin: 0;
 }
 
 /* Buttons */
+a {
+  color: #FFF;
+}
+
+.light a {
+  color: #2C2C2C;
+}
+
 .con-button {
-    color: #FFF;
-    border: 2px solid;
-    background-color: transparent;
-    border-radius: 16px;
-    display: inline-block;
-    line-height: 28px;
-    padding: 0 14px;
-    text-decoration: none;
-    font-size: 14px;
-    font-style: normal;
+  color: #FFF;
+  border: 2px solid;
+  background-color: transparent;
+  border-radius: 16px;
+  display: inline-block;
+  line-height: 28px;
+  padding: 0 14px;
+  text-decoration: none;
+  font-size: 14px;
+  font-style: normal;
+}
+
+.con-button.button-XL {
+  padding: 0 18px;
+  line-height: 36px;
+  border-radius: 20px;
+  font-size: 17px;
 }
 
 .light .con-button {
-    color: #000;
+  color: #000;
 }
 
 .con-button.blue {
-    color: #FFF;
-    background: rgb(20, 115, 230);
-    border: 2px solid rgb(20, 115, 230);
+  color: #FFF;
+  background: rgb(20, 115, 230);
+  border: 2px solid rgb(20, 115, 230);
 }
