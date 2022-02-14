@@ -210,10 +210,6 @@
     text-align: center;
   }
 
-  .marquee.large .action-area {
-    gap: var(--spacing-xl);
-  }
-
   .marquee.action-area .con-button.button-XL {
     line-height: 44px;
     border-radius: 22px;
