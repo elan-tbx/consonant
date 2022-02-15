@@ -150,6 +150,12 @@
   order: unset;
 }
 
+@media screen and (min-width: 600px) {
+  .marquee .action-area a {
+    width: unset;
+  }
+}
+
 @media screen and (min-width: 1200px) {
   .marquee {
     min-height: 560px;
@@ -203,11 +209,6 @@
   .marquee.small .text .action-area,
   .marquee.large .text .action-area {
     margin-bottom: 0;
-  }
-
-  .marquee .action-area a {
-    width: unset;
-    text-align: center;
   }
 
   .marquee.action-area .con-button.button-XL {
