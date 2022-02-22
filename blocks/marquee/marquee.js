@@ -11,7 +11,7 @@
  */
 
 /*
- * Marquee - v0.0.2
+ * Marquee - v1.0.0
  */
 
 function decorateButtons(el, isLarge) {
@@ -25,7 +25,9 @@ function decorateButtons(el, isLarge) {
     parent.remove();
   });
   if (buttons.length > 0) {
-    buttons[0].closest('p').classList.add('action-area');
+    const actionArea = buttons[0].closest('p');
+    actionArea.classList.add('action-area');
+    actionArea.nextElementSibling?.classList.add('supplemental-text', 'body-XL');
   }
 }
 
@@ -49,9 +51,7 @@ export default function init(el) {
   const text = foreground.querySelector('h1, h2, h3, h4, h5, h6').closest('div');
   text.classList.add('text');
   const image = foreground.querySelector(':scope > div:not([class])');
-  if (image) {
-    image.classList.add('image');
-  }
+  image?.classList.add('image');
   const isLarge = el.closest('.marquee').classList.contains('large');
   decorateButtons(text, isLarge);
   decorateText(text, isLarge);

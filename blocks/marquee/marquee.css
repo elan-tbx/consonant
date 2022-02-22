@@ -46,6 +46,10 @@
   max-width: 100%;
 }
 
+.marquee .foreground > div {
+  flex: 0 0 auto;
+}
+
 .marquee.quiet .foreground > div {
   flex: 0 0 100%;
 }
@@ -55,6 +59,7 @@
   display: flex;
   flex-direction: column;
   padding: 0;
+  margin: 0 auto;
 }
 
 .marquee .text .detail-M {
@@ -88,7 +93,7 @@
 }
 
 .marquee .text .body-XL {
-  order: 4;
+  order: 5;
   margin-bottom: var(--spacing-m);
 }
 
@@ -106,6 +111,11 @@
 .marquee .action-area a {
   width: 100%;
   text-align: center;
+}
+
+.marquee.large .supplemental-text {
+  order: 4;
+  margin: 0 0 var(--spacing-m) 0;
 }
 
 .marquee.large .action-area {
@@ -170,6 +180,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0;
+    gap: calc(var(--grid-column-width));
   }
 
   .marquee.small .foreground {
@@ -179,11 +190,15 @@
   .marquee.large .foreground {
     max-width: var(--grid-container-width);
   }
-  
-  .marquee .foreground > div {
-    flex: 0 0 calc(50% - calc(var(--grid-column-width) / 2));
-  }
 
+  .marquee .text {
+    width: calc(var(--grid-column-width) * 5);
+  }
+  
+  .marquee .image {
+    width: calc(var(--grid-column-width) * 6);
+  }
+  
   .marquee .text {
     padding: var(--spacing-xl) 0;
   }
@@ -215,6 +230,10 @@
   .marquee.action-area .con-button.button-XL {
     line-height: 44px;
     border-radius: 22px;
+  }
+
+  .marquee.large .supplemental-text {
+    margin: var(--spacing-s) 0 0 0;
   }
 }
 
