@@ -101,6 +101,10 @@
   max-height: 56px;
 }
 
+.marquee.large .text img {
+  max-height: 64px;
+}
+
 .marquee .action-area {
   display: flex;
   margin: 0;
@@ -116,6 +120,7 @@
 .marquee.large .supplemental-text {
   order: 4;
   margin: 0 0 var(--spacing-m) 0;
+  font-weight: 700;
 }
 
 .marquee.large .action-area {
