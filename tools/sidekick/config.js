@@ -13,5 +13,14 @@ window.hlx.initSidekick({
         },
       },
     },
+    {
+      id: 'schema',
+      button: {
+        text: 'Check SEO',
+        action: () => {
+          window.open(` https://search.google.com/test/rich-results?url=${window.location.href}`);
+        },
+      },
+    },
   ],
 });
