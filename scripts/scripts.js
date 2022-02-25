@@ -129,6 +129,7 @@ function wrapSections(sections) {
  * @param {Element} block The block element
  */
 export function decorateBlock(block) {
+  console.log(block);
   const trimDashes = (str) => str.replace(/(^\s*-)|(-\s*$)/g, '');
   const classes = Array.from(block.classList.values());
   const blockName = classes[0];

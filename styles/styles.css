@@ -53,6 +53,14 @@
   --type-body-m-size: 36px;
 }
 
+.fragment {
+  display: none;
+}
+
+.is-Visible {
+  display: block;
+}
+
 @media screen and (min-width: 1200px) {
   :root {
       --type-heading-xxl-size: 44px;
