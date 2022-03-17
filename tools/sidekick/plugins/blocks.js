@@ -158,7 +158,7 @@ async function loadPlaceholderList(list) {
     copy.addEventListener('click', (e) => {
       e.target.classList.add('copied');
 
-      const blob = new Blob([`<span style="background-color: grey; color: white">{{${text.textContent}}}</span>`], { type: 'text/html' });
+      const blob = new Blob([`{{${text.textContent}}}`], { type: 'text/plain' });
       createCopy(blob);
       setTimeout(() => {
         e.target.classList.remove('copied');
