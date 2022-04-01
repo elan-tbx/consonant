@@ -17,7 +17,6 @@ const loadFragment = async (fragmentEl) => {
 
     const blocks = fragmentEl.querySelectorAll('div[class]');
     blocks.forEach((block) => {
-      console.log(block);
       decorateBlock(block);
       loadBlock(block, true);
     });
