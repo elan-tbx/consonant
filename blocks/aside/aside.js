@@ -55,10 +55,8 @@ export default function init(el) {
     }
 
     text?.classList.add('text');
-    const secondary = text.querySelector(':scope img');
-    if (secondary) secondary.classList.add('secondary');
-    const image = foreground.querySelector(':scope > div:not([class])');
-    if (image) image.classList.add('image');
+    text?.querySelector(':scope img')?.classList.add('secondary');
+    foreground?.querySelector(':scope > div:not([class])')?.classList.add('image');
 
     decorateButtons(text);
     decorateText(text);

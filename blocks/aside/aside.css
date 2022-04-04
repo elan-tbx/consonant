@@ -1,3 +1,5 @@
+/* Aside Block */
+
 .aside {
     width: 100%;
     display: none;
@@ -7,144 +9,181 @@
     overflow: hidden;
 }
 
-.aside p {
-    margin: 0;
-}
-
-.aside.small {
-    min-height: 420px;
-}
-
-.aside.medium {
-    min-height: 560px;
-}
-
-.aside.large {
-    min-height: 700px;
-}
-
 .aside[data-block-status="loaded"] {
     display: flex;
 }
 
-.aside .container {
-    display: flex;
-    position: relative;
-    align-items: baseline;
-    min-height: 420px;
-    justify-content: center;
-    flex-direction: column-reverse;
+.aside p {
+    margin: 0;
+}
+
+/* Standard and Default Aside - Mobile first */
+
+.aside .background {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.aside .background>div {
+    height: 100%;
 }
 
 .aside .background img {
     object-fit: cover;
     width: 100%;
     min-height: 700px;
+    height: 100%;
 }
 
-.aside .background {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    overflow: hidden;
+.aside .foreground.container {
+    min-height: 420px;
+    display: flex;
+    position: relative;
+    align-items: baseline;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.aside .container .text {
+.aside .foreground.container .text {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
+    padding: var(--spacing-xxl) 0 0;
 }
 
-.aside .container .text>* {
+.aside .foreground.container .text>* {
     width: 100%;
 }
 
-.aside .container .heading-XL {
+.aside .foreground.container .text .heading-XL {
     margin: var(--spacing-s) 0;
+    font-size: var(--type-heading-l-size);
+    line-height: var(--type-heading-l-lh);
 }
 
-.aside .container .body-S {
+.aside .foreground.container .text .body-S {
     margin-bottom: var(--spacing-m);
 }
 
-.aside .container .action-area {
+.aside .foreground.container .text .action-area {
     margin-bottom: 0;
 }
 
-.aside .container div {
+.aside .foreground.container .text .action-area>a {
+    margin-right: var(--spacing-m);
+}
+
+.aside .foreground.container div {
     flex: 1 1 auto;
 }
 
-.aside .container .image {
-    margin-top: 40px;
-    margin-bottom: 10px;
+.aside .foreground.container .image {
+    margin-top: 32px;
+    margin-bottom: var(--spacing-xxl);
 }
 
-.aside .container .text {
-    padding: 80px 0;
-}
-
-.aside .container img {
+.aside .foreground.container img {
     object-fit: contain;
     height: 100%;
     width: 100%;
 }
 
-.aside .container img.secondary {
-    max-width: 400px;
+.aside .foreground.container img.secondary {
+    max-width: 234px;
     height: var(--spacing-xl);
     margin-bottom: var(--spacing-m);
+    object-fit: cover;
 }
 
-.aside.split .container .text {
+/* Simple Aside */
+
+.aside.simple .foreground.container .text {
+    margin-bottom: 80px;
+}
+
+.aside.simple .foreground.container .image {
+    display: none;
+}
+
+/* Split Aside mobile */
+
+.aside.split {
+    flex-direction: column;
+}
+
+.aside.split.large {
+    flex-direction: column-reverse;
+}
+
+.aside.split .foreground.container .text {
     color: white;
 }
 
 .aside.split .background {
+    position: relative;
     background-color: #1E1E1E;
 }
 
+.aside.split.large .background {
+    background-color: transparent;
+}
+
 .aside.split .background img {
-    max-width: 61vw;
-    width: 100vw;
-    position: absolute;
-    right: 0;
-    object-fit: cover;
+    position: relative;
+    min-height: 270px;
 }
 
-.aside.split .container .image {
+.aside.split .foreground.container {
+    background-color: #1E1E1E;
+    max-width: 100%;
+}
+
+.aside.split .foreground.container .text {
+    padding: 40px 0;
+    max-width: var(--grid-container-width);
+    margin: 0 auto;
+}
+
+.aside.split .foreground.container .image {
     margin: 0;
+    display: none;
 }
 
-.aside.split .container img {
+.aside.split .foreground.container img {
     object-fit: cover;
+    height: 270px;
 }
 
-.aside.split .container {
+.aside.split .foreground.container {
     flex-direction: column;
 }
 
-.aside.augmented-image .container {
+/* Augmented Image Aside */
+
+.aside.augmented-image .foreground.container {
     justify-content: center;
     align-items: center;
 }
 
-.aside.augmented-image .container .text {
+.aside.augmented-image .foreground.container .text {
     margin: 0;
 }
 
-.aside.augmented-image .container .image {
+.aside.augmented-image .foreground.container .image {
     margin: 0;
 }
 
-@media screen and (min-width: 756px) {
-    .aside {
-        padding: 0;
-    }
+/* Tablet */
 
-    .aside .container {
+@media screen and (min-width: 768px) {
+
+    /* Standard */
+
+    .aside .foreground.container {
         justify-content: space-between;
         align-items: stretch;
         flex-direction: row;
@@ -152,73 +191,147 @@
         margin: 0 auto;
     }
 
-    .aside.split .container {
-        flex-direction: row;
-    }
-
-    .aside .container .image {
+    .aside .foreground.container .image {
         margin-top: 0;
         margin-bottom: 0;
+        flex: 0 0 50%;
+        padding-left: var(--spacing-s);
+        display: block;
     }
 
-    .aside .container .text {
+    .aside .foreground.container .text {
+        margin-bottom: 0;
+        padding: var(--spacing-xxl) var(--spacing-s) var(--spacing-xxl) 0;
+        flex: -1 0 50%;
+    }
+
+    /* Simple */
+
+    .aside.simple .foreground.container .text {
         margin-bottom: 0;
     }
 
-    .aside .container .text {
-        flex: 0 0 41%;
+    .aside.simple .foreground.container .image {
+        display: block;
     }
 
-    .aside .container .image {
-        flex: 0 0 55%;
+    /* Split */
+
+    .aside.split.large {
+        flex-direction: column;
+        background-color: #1E1E1E;
     }
 
-    .aside.split .container {
-        justify-content: stretch;
+    .aside.split .background {
+        background-color: #1E1E1E;
+        position: absolute;
     }
 
-    .aside.split .container .text {
-        color: white;
-    }
-
-    .aside.split .container .image {
+    .aside.split .background img {
+        max-width: 59vw;
+        width: 100vw;
+        position: absolute;
+        right: 0;
         object-fit: cover;
     }
 
-    .aside.split .container .text {
-        flex: 0 0 25%;
+    .aside.split .foreground.container {
+        flex-direction: row;
+        justify-content: stretch;
+        max-width: var(--grid-container-width);
+        margin: 0 auto;
+        background-color: transparent;
     }
 
-    .aside.split .container .image {
-        flex: 0 0 75%;
+    .aside.split .foreground.container .text {
+        color: white;
+        flex: 0 0 34%;
+        padding: var(--spacing-xxl) 32px var(--spacing-xxl) 0;
+        max-width: 100%;
+        margin: 0;
     }
+
+    .aside.split .foreground.container .image {
+        object-fit: cover;
+        flex: 0 0 61%;
+        display: block;
+        padding: 0;
+    }
+
+    /* Augmented Image */
 
     .aside.augmented-image .background.augmented {
         clip-path: inset(19% 0);
     }
 
-    .aside.augmented-image .container .image {
+    .aside.augmented-image .foreground.container .image {
         flex: 0 0 57%;
         max-width: none;
     }
 
-    .aside.augmented-image .container .text {
+    .aside.augmented-image .foreground.container .text {
         flex: 0 0 43%;
     }
 }
 
+/* Desktop */
+
 @media screen and (min-width: 1200px) {
-    .aside.augmented-image {
+
+    /* Standard */
+
+    .aside.small {
+        min-height: 420px;
+    }
+
+    .aside.medium {
+        min-height: 560px;
+    }
+
+    .aside.large {
         min-height: 700px;
     }
 
-    .aside .container .image {
+    .aside .foreground.container .image {
+        flex: 0 0 55%;
         max-width: 520px;
         object-fit: cover;
     }
 
-    .aside.split .container .image {
+    .aside .foreground.container .text {
+        flex: 0 0 41%;
+    }
+
+    .aside .foreground.container img.secondary {
+        max-width: 400px;
+    }
+
+    .aside .foreground.container .text .heading-XL {
+        margin: var(--spacing-s) 0;
+        font-size: var(--type-heading-xl-size);
+        line-height: var(--type-heading-xl-lh);
+    }
+
+    /* Split */
+
+    .aside.split .background img {
+        max-width: 60vw;
+    }
+
+    .aside.split .foreground.container .text {
+        flex: 0 0 27%;
+        padding: var(--spacing-xxl) 32px var(--spacing-xxl) 0;
+    }
+
+    .aside.split .foreground.container .image {
+        flex: 0 0 70%;
         max-width: none;
         object-fit: cover;
+    }
+
+    /* Augmented Image */
+
+    .aside.augmented-image {
+        min-height: 700px;
     }
 }
