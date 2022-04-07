@@ -24,6 +24,14 @@
     --type-heading-all-weight: 700;
     --type-heading-xl-size: 36px;
     --type-heading-xl-lh: 45px;
+    --type-heading-l-size: 28px;
+    --type-heading-l-lh: 35px;
+    --type-heading-m-size: 24px;
+    --type-heading-m-lh: 30px;
+    --type-heading-s-size: 20px;
+    --type-heading-s-lh: 25px;
+    --type-heading-xs-size: 18px;
+    --type-heading-xs-lh: 23px;
 
     --type-body-m-size: 18px;
     --type-body-m-lh: 27px;
@@ -61,6 +69,13 @@ body {
     line-height: var(--type-heading-xl-lh);
     font-weight: var(--type-heading-all-weight);
     margin: 0;
+}
+
+.heading-L {
+  font-size: var(--type-heading-l-size);
+  line-height: var(--type-heading-l-lh);
+  font-weight: var(--type-heading-all-weight);
+  margin: 0;
 }
 
 .body-M {
