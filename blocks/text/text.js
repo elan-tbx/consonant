@@ -16,21 +16,24 @@
 
 export default function init(el) {
   const rows = el.querySelectorAll(':scope > div');
+  el.classList.add('container');
   rows.forEach((row) => {
+    const prev = row.previousElementSibling;
     switch (row.children.length) {
       case 1:
         row.classList.add('row', 'full-width');
+        row.querySelector('h1, h2, h3, h4, h5, h6').classList.add('heading');
         break;
       case 2:
         row.classList.add('row', 'two-up');
-        if (row.previousElementSibling && row.previousElementSibling.classList.contains('full-width')) {
-          row.previousElementSibling.classList.add('pre-up', 'pre-two-up');
+        if (prev && prev.classList.contains('full-width')) {
+          prev.classList.add('pre-up', 'pre-two-up');
         }
         break;
       case 3:
         row.classList.add('row', 'three-up');
-        if (row.previousElementSibling && row.previousElementSibling.classList.contains('full-width')) {
-          row.previousElementSibling.classList.add('pre-up', 'pre-three-up');
+        if (prev && prev.classList.contains('full-width')) {
+          prev.classList.add('pre-up', 'pre-three-up');
         }
         break;
       default:

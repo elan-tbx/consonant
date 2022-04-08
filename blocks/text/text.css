@@ -1,7 +1,11 @@
 .text {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.text[data-block-status="loaded"] {
+  display: flex;
 }
 
 .text .row {
@@ -10,27 +14,108 @@
 
 .text .full-width {
   justify-content: center;
+  padding: var(--spacing-xxl) 0;
   text-align: center;
-  width: calc(var(--grid-column-width) * 8);
+}
+
+.text .full-width.pre-up {
+  padding: var(--spacing-xxl) 0 var(--spacing-xl);
 }
 
 .text .full-width:not(.pre-up) h1 {
   font-size: var(--type-heading-xl-size);
   line-height: var(--type-heading-xl-lh);
+  margin: 0 0 var(--spacing-s);
+}
+
+.text .full-width:not(.pre-up) h2,
+.text .full-width:not(.pre-up) h3,
+.text .full-width:not(.pre-up) h4,
+.text .full-width:not(.pre-up) h5,
+.text .full-width:not(.pre-up) h6 {
+  font-size: var(--type-heading-l-size);
+  line-height: var(--type-heading-l-lh);
+  margin: 0 0 var(--spacing-s);
+}
+
+.text .full-width a:first-child:last-child {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.text .full-width p {
+  margin: 0;
+}
+
+.text .full-width p:not(:last-child) {
+  margin: 0 0 var(--spacing-ml);
 }
 
 .text .two-up {
-  width: calc(var(--grid-column-width) * 10);
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.text .two-up > div {
-  flex: 0 0 50%;
+.text .two-up > div,
+.text .three-up > div {
+  margin: 0 0 var(--spacing-ml)
+}
+
+.text .two-up p:first-child,
+.text .three-up p:first-child {
+  margin: 0;
+}
+
+.text .two-up strong:first-child:last-child,
+.text .two-up h1,
+.text .two-up h2,
+.text .two-up h3,
+.text .two-up h4,
+.text .two-up h5,
+.text .two-up h6 {
+  font-size: var(--type-heading-s-size);
+  line-height: var(--type-heading-s-lh);
+  margin: 0 0 var(--spacing-s);
 }
 
 .text .three-up {
-  width: var(--grid-container-width);
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.text .three-up > div {
-  flex: 0 0 33.333%;
+.text .three-up strong:first-child:last-child,
+.text .three-up h1,
+.text .three-up h2,
+.text .three-up h3,
+.text .three-up h4,
+.text .three-up h5,
+.text .three-up h6 {
+  font-size: var(--type-heading-xs-size);
+  line-height: var(--type-heading-xs-lh);
+}
+
+.text .three-up p {
+  font-size: var(--type-body-s-size);
+  line-height: var(--type-body-s-lh);
+}
+
+@media screen and (min-width: 768px) {
+  .text .two-up > div,
+  .text .three-up > div {
+    flex: 0 0 calc(50% - calc(var(--spacing-ml) / 2));
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .text .two-up {
+    width: calc(var(--grid-column-width) * 10);
+  }
+
+  .text .three-up {
+    width: var(--grid-container-width);
+  }
+
+  .text .three-up > div {
+    flex: 0 0 calc(33.333% - calc(var(--spacing-ml) / 2));
+  }
 }
