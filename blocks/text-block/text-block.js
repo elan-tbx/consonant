@@ -16,24 +16,35 @@ import { decorateButtons } from '../../scripts/decorate.js';
  * Text Block - v0.0.1
  */
 
+function styleBackground(background) {
+  background.classList.add('background');
+  if (!background.querySelector(':scope img')) {
+    background.children[0].style.display = 'none';
+    background.setAttribute('style', `background: ${background.textContent}`);
+  }
+  if (background.textContent === '#323232') {
+    background.parentElement.classList.add('dark');
+  }
+}
+
 export default function init(el) {
-  const rows = el.querySelectorAll(':scope > div');
-  el.classList.add('container');
+  const children = el.querySelectorAll(':scope > div');
+  const [background, ...rows] = children;
   rows.forEach((row) => {
     const prev = row.previousElementSibling;
     switch (row.children.length) {
       case 1:
-        row.classList.add('row', 'full-width');
+        row.classList.add('row', 'container', 'full-width');
         row.querySelector('h1, h2, h3, h4, h5, h6').classList.add('heading');
         break;
       case 2:
-        row.classList.add('row', 'vertical', 'two-up');
+        row.classList.add('row', 'container', 'vertical', 'two-up');
         if (prev && prev.classList.contains('full-width')) {
           prev.classList.add('pre-up', 'pre-two-up');
         }
         break;
       case 3:
-        row.classList.add('row', 'vertical', 'three-up');
+        row.classList.add('row', 'container', 'vertical', 'three-up');
         if (prev && prev.classList.contains('full-width')) {
           prev.classList.add('pre-up', 'pre-three-up');
         }
@@ -43,5 +54,6 @@ export default function init(el) {
         row.classList.add('hidden');
     }
   });
+  styleBackground(background);
   decorateButtons(el);
 }
