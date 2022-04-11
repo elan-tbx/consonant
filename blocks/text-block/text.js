@@ -13,7 +13,7 @@
 import { decorateButtons } from '../../scripts/decorate.js';
 
 /*
- * Text - v0.0.1
+ * Text Block - v0.0.1
  */
 
 export default function init(el) {

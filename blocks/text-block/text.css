@@ -1,123 +1,123 @@
-.text {
+.text-block {
   display: none;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.text[data-block-status="loaded"] {
+.text-block[data-block-status="loaded"] {
   display: flex;
 }
 
-.text p {
+.text-block p {
   margin-top: 0;
 }
 
-.text strong:first-child:last-child {
+.text-block strong:first-child:last-child {
   display: block;
 }
 
-.text .row {
+.text-block .row {
   display: flex;
 }
 
-.text .row.hidden {
+.text-block .row.hidden {
   display: none;
 }
 
-.text .full-width {
+.text-block .full-width {
   justify-content: center;
   padding: var(--spacing-xxl) 0;
   text-align: center;
 }
 
-.text .full-width > div {
+.text-block .full-width > div {
   max-width: var(--block-container-width-s);
 }
 
-.text .full-width.pre-up {
+.text-block .full-width.pre-up {
   padding: var(--spacing-xxl) 0 var(--spacing-xl);
 }
 
-.text .full-width:not(.pre-up) h1 {
+.text-block .full-width:not(.pre-up) h1 {
   font-size: var(--type-heading-xl-size);
   line-height: var(--type-heading-xl-lh);
   margin: 0 0 var(--spacing-s);
 }
 
-.text .full-width:not(.pre-up) h2,
-.text .full-width:not(.pre-up) h3,
-.text .full-width:not(.pre-up) h4,
-.text .full-width:not(.pre-up) h5,
-.text .full-width:not(.pre-up) h6 {
+.text-block .full-width:not(.pre-up) h2,
+.text-block .full-width:not(.pre-up) h3,
+.text-block .full-width:not(.pre-up) h4,
+.text-block .full-width:not(.pre-up) h5,
+.text-block .full-width:not(.pre-up) h6 {
   font-size: var(--type-heading-l-size);
   line-height: var(--type-heading-l-lh);
   margin: 0 0 var(--spacing-s);
 }
 
-.text .full-width a:first-child:last-child,
-.text .vertical a:not(.con-button) {
+.text-block .full-width a:first-child:last-child,
+.text-block .vertical a:not(.con-button) {
   color: var(--color-primary);
   font-weight: 700;
 }
 
-.text .full-width p {
+.text-block .full-width p {
   margin: 0;
 }
 
-.text .full-width p:not(:last-child) {
+.text-block .full-width p:not(:last-child) {
   margin: 0 0 var(--spacing-ml);
 }
 
-.text .vertical {
+.text-block .vertical {
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.text .vertical > div {
+.text-block .vertical > div {
   margin: 0 0 var(--spacing-ml)
 }
 
-.text .vertical p:first-child {
+.text-block .vertical p:first-child {
   margin: 0;
 }
 
-.text .vertical a:not(.con-button) {
+.text-block .vertical a:not(.con-button) {
   font-size: var(--type-body-xs-size);
   line-height: var(--type-body-xs-lh);
 }
 
-.text .vertical a.outline + a {
+.text-block .vertical a.outline + a {
   margin-left: var(--spacing-m);
 }
 
-.text .vertical strong:first-child:last-child,
-.text .vertical h1,
-.text .vertical h2,
-.text .vertical h3,
-.text .vertical h4,
-.text .vertical h5,
-.text .vertical h6 {
+.text-block .vertical strong:first-child:last-child,
+.text-block .vertical h1,
+.text-block .vertical h2,
+.text-block .vertical h3,
+.text-block .vertical h4,
+.text-block .vertical h5,
+.text-block .vertical h6 {
   font-size: var(--type-heading-s-size);
   line-height: var(--type-heading-s-lh);
   margin: 0 0 var(--spacing-s);
 }
 
 @media screen and (min-width: 768px) {
-  .text .vertical > div {
+  .text-block .vertical > div {
     flex: 0 0 calc(50% - calc(var(--spacing-ml) / 2));
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .text .two-up {
+  .text-block .two-up {
     width: calc(var(--grid-column-width) * 10);
   }
 
-  .text .three-up {
+  .text-block .three-up {
     width: var(--grid-container-width);
   }
 
-  .text .three-up > div {
+  .text-block .three-up > div {
     flex: 0 0 calc(33.333% - calc(var(--spacing-ml) / 2));
   }
 }
