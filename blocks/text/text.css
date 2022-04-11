@@ -20,6 +20,10 @@
   display: flex;
 }
 
+.text .row.hidden {
+  display: none;
+}
+
 .text .full-width {
   justify-content: center;
   padding: var(--spacing-xxl) 0;

@@ -39,6 +39,8 @@ export default function init(el) {
         }
         break;
       default:
+        // invalid number of columns, hide row
+        row.classList.add('hidden');
     }
   });
   decorateButtons(el);
