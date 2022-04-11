@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+import { decorateButtons } from '../../scripts/decorate';
+
 /*
  * Text - v0.0.1
  */
@@ -39,4 +41,5 @@ export default function init(el) {
       default:
     }
   });
+  decorateButtons(el);
 }
