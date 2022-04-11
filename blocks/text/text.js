@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { decorateButtons } from '../../scripts/decorate';
+import { decorateButtons } from '../../scripts/decorate.js';
 
 /*
  * Text - v0.0.1
@@ -27,13 +27,13 @@ export default function init(el) {
         row.querySelector('h1, h2, h3, h4, h5, h6').classList.add('heading');
         break;
       case 2:
-        row.classList.add('row', 'two-up');
+        row.classList.add('row', 'vertical', 'two-up');
         if (prev && prev.classList.contains('full-width')) {
           prev.classList.add('pre-up', 'pre-two-up');
         }
         break;
       case 3:
-        row.classList.add('row', 'three-up');
+        row.classList.add('row', 'vertical', 'three-up');
         if (prev && prev.classList.contains('full-width')) {
           prev.classList.add('pre-up', 'pre-three-up');
         }
