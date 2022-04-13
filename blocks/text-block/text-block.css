@@ -6,7 +6,7 @@
 }
 
 .text-block[data-block-status="loaded"] {
-  display: flex;
+  display: block;
 }
 
 .text-block .background {
