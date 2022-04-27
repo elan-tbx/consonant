@@ -22,9 +22,6 @@ function styleBackground(background) {
     background.children[0].style.display = 'none';
     background.setAttribute('style', `background: ${background.textContent}`);
   }
-  if (background.textContent === '#323232') {
-    background.parentElement.classList.add('dark');
-  }
 }
 
 export default function init(el) {
