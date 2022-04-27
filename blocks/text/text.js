@@ -32,7 +32,7 @@ export default function init(el) {
     switch (row.children.length) {
       case 1:
         row.classList.add('row', 'container', 'full-width');
-        row.querySelector('h1, h2, h3, h4, h5, h6').classList.add('heading');
+        row.querySelector('h1, h2, h3, h4, h5, h6, strong:first-child:last-child').classList.add('heading');
         break;
       case 2:
         row.classList.add('row', 'container', 'vertical', 'two-up');
