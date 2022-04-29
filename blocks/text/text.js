@@ -10,29 +10,40 @@
  * governing permissions and limitations under the License.
  */
 
-import { decorateButtons } from '../../scripts/decorate.js';
+import { decorateButtons, decorateContent } from '../../scripts/decorate.js';
 
 /*
  * Text Block - v0.0.1
  */
 
-function styleBackground(background) {
-  background.classList.add('background');
-  if (!background.querySelector(':scope img')) {
-    background.children[0].style.display = 'none';
-    background.setAttribute('style', `background: ${background.textContent}`);
-  }
-}
-
 export default function init(el) {
   const children = el.querySelectorAll(':scope > div');
   const [background, ...rows] = children;
-  rows.forEach((row) => {
+  // basic background handling
+  if (!background.querySelector(':scope img')) {
+    el.setAttribute('style', `background: ${background.textContent}`);
+    background.remove();
+  }
+
+  // create foreground
+  const container = document.createElement('div');
+  container.classList.add('foreground', 'container');
+  el.appendChild(container);
+
+  // process rows
+  rows.forEach((row, idx) => {
+    let headingClass = 'heading-M';
+    if (idx === 0 && (el.classList.contains('full-width') || el.classList.contains('has-intro'))) {
+      row.children[0].classList.add('full-width');
+      headingClass = el.classList.contains('large') ? 'heading-XL' : 'heading-L';
+    }
+    decorateContent(row, ['', headingClass, 'body-M']);
+    container.insertAdjacentElement('beforeend', row.children[0]);
+    row.remove();
+
     const prev = row.previousElementSibling;
     switch (row.children.length) {
       case 1:
-        row.classList.add('row', 'container', 'full-width');
-        row.querySelector('h1, h2, h3, h4, h5, h6, strong:first-child:last-child').classList.add('heading');
         break;
       case 2:
         row.classList.add('row', 'container', 'vertical', 'two-up');
@@ -51,6 +62,5 @@ export default function init(el) {
         row.classList.add('hidden');
     }
   });
-  styleBackground(background);
   decorateButtons(el);
 }
